@@ -80,8 +80,14 @@
     <script>
       window.onload = GameMaker_Init;
     </script>
-    <script>
+<script>
 window.addEventListener("load", async function () {
+    const box = document.createElement("pre");
+    box.style.cssText =
+        "position:fixed;top:10px;left:10px;background:white;color:black;padding:15px;z-index:999999;font:16px monospace;";
+    box.textContent = "Checking game files...\n";
+    document.body.appendChild(box);
+
     const files = [
         "html5game/RetroBowl.js",
         "html5game/splash.png"
@@ -90,9 +96,9 @@ window.addEventListener("load", async function () {
     for (const file of files) {
         try {
             const response = await fetch(file);
-            console.log(file + ": " + response.status);
+            box.textContent += file + ": " + response.status + "\n";
         } catch (error) {
-            console.log(file + ": FAILED TO LOAD");
+            box.textContent += file + ": FAILED TO LOAD\n";
         }
     }
 });
